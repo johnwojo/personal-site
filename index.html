@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>John Wojciechowski</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Tokens ──────────────────────────────────────────── */
+    :root {
+      --ink:       #1a1a1a;
+      --ink-soft:  #5a5a5a;
+      --ink-ghost: #9a9a9a;
+      --paper:     #f7f6f2;
+      --rule:      #e0ddd6;
+      --accent:    #2a52a0;   /* cerulean — John's color */
+      --accent-lt: #dde4f5;
+
+      --f-display: 'Instrument Serif', Georgia, serif;
+      --f-body:    'DM Sans', system-ui, sans-serif;
+
+      --max: 680px;
+      --gutter: clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    /* ── Reset ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--f-body);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* ── Layout shell ────────────────────────────────────── */
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    nav {
+      padding: 2rem 0 0;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-name {
+      font-family: var(--f-body);
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.03em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    .hero {
+      padding: clamp(4rem, 12vw, 7rem) 0 clamp(3rem, 8vw, 5rem);
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-ghost);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.0625rem;
+      color: var(--ink-soft);
+      max-width: 520px;
+      line-height: 1.65;
+    }
+
+    /* ── Sections shared ─────────────────────────────────── */
+    section {
+      padding: clamp(2.5rem, 7vw, 4rem) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-label {
+      font-size: 0.6875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-ghost);
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── About ───────────────────────────────────────────── */
+    .about p {
+      font-size: 1.0625rem;
+      color: var(--ink-soft);
+      margin-bottom: 1rem;
+    }
+    .about p:last-child { margin-bottom: 0; }
+    .about strong { color: var(--ink); font-weight: 500; }
+
+    /* ── Work ────────────────────────────────────────────── */
+    .work-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .work-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .work-item:first-child { border-top: none; padding-top: 0; }
+    .work-title {
+      font-family: var(--f-display);
+      font-size: 1.1875rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+    .work-desc {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .work-tag {
+      font-size: 0.6875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      margin-top: 0.15rem;
+    }
+
+    /* ── Writing ─────────────────────────────────────────── */
+    .writing-intro {
+      font-size: 1.0625rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.75rem;
+      line-height: 1.65;
+    }
+    .writing-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent-lt);
+      padding-bottom: 0.1rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .writing-link:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+    .writing-link svg {
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .writing-link:hover svg { transform: translate(2px, -2px); }
+
+    /* ── Contact ─────────────────────────────────────────── */
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.9375rem;
+      color: var(--ink-soft);
+      transition: color 0.15s;
+    }
+    .contact-item:hover { color: var(--accent); }
+    .contact-item svg { flex-shrink: 0; }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer {
+      padding: 2rem 0 3rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--ink-ghost);
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .work-item { grid-template-columns: 1fr; }
+      .work-tag { justify-self: start; }
+      nav { flex-direction: column; gap: 0.75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <!-- Nav -->
+    <nav>
+      <span class="nav-name">John Wojciechowski</span>
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      <p class="hero-eyebrow">AI Solutions Engineer · New York City</p>
+      <h1>Building the <em>layer</em> between<br>humans and intelligent systems.</h1>
+      <p class="hero-sub">
+        I help organizations adopt AI where it actually matters — not by automating for its own sake, but by making knowledge more accessible, decisions more legible, and teams more capable.
+      </p>
+    </header>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <p class="section-label">About</p>
+      <p>
+        I'm a <strong>solutions engineer turned de facto product manager</strong>, with a background in building knowledge systems at scale. Most recently at Meta, I owned a ~3,000-asset Capacity library used across global infrastructure teams — acting as the connective tissue between engineering, tooling, and the people who needed answers fast.
+      </p>
+      <p>
+        Before that, I was part of the founding team at EliseAI, where I built the support function from the ground up. I think in systems, write to clarify, and tend to notice the organizational problems that nobody has officially assigned to anyone yet.
+      </p>
+      <p>
+        My longer arc is toward <strong>AI product and alignment work</strong> — the place where technical capability meets human consequence. I'm interested in what it means to build AI that's actually good for people, not just impressive to demo.
+      </p>
+    </section>
+
+    <!-- Work -->
+    <section id="work">
+      <p class="section-label">Selected Work</p>
+      <div class="work-list">
+
+        <div class="work-item">
+          <div>
+            <p class="work-title">Capacity Knowledge Library — Meta</p>
+            <p class="work-desc">De facto PM on a 3,000+ asset internal knowledge product for global infrastructure capacity teams. Drove adoption, improved findability, and served as the bridge between engineering stakeholders and end users.</p>
+          </div>
+          <span class="work-tag">Scale</span>
+        </div>
+
+        <div class="work-item">
+          <div>
+            <p class="work-title">Support Function — EliseAI</p>
+            <p class="work-desc">Built the support organization from scratch as a founding team member. Designed process, tooling, and team structure during the company's early growth phase, reporting directly to the CEO.</p>
+          </div>
+          <span class="work-tag">Applied AI</span>
+        </div>
+
+        <div class="work-item">
+          <div>
+            <p class="work-title">Support Engineering — Mode Analytics</p>
+            <p class="work-desc">Early support engineering role at a data analytics platform, where a background in liberal arts met a growing fluency in technical systems. The job that made clear how much the gap between users and tools costs organizations — and that closing it was worth doing deliberately.</p>
+          </div>
+          <span class="work-tag">Data</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Writing -->
+    <section id="writing">
+      <p class="section-label">Writing</p>
+      <p class="writing-intro">
+        I write about the formation of humans and machines — what it means to build AI thoughtfully, and what AI does to the people who build with it. I come at this as a Christian, a father, and someone with real technical proximity to these systems.
+      </p>
+      <a class="writing-link" href="https://humancyborgrelations.substack.com" target="_blank" rel="noopener">
+        Human Cyborg Relations on Substack
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <p class="section-label">Contact</p>
+      <div class="contact-row">
+        <a class="contact-item" href="mailto:jwojo13@gmail.com">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 4C1.5 3.17 2.17 2.5 3 2.5H13C13.83 2.5 14.5 3.17 14.5 4V12C14.5 12.83 13.83 13.5 13 13.5H3C2.17 13.5 1.5 12.83 1.5 12V4Z" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M1.5 4.5L8 9L14.5 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          jwojo13@gmail.com
+        </a>
+        <a class="contact-item" href="https://linkedin.com/in/johnwojciechowski" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1.5" y="1.5" width="13" height="13" rx="2" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M4 6.5V12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="4" cy="4.5" r="0.75" fill="currentColor"/>
+            <path d="M7.5 12V9C7.5 7.9 8.2 6.5 9.5 6.5C10.8 6.5 11.5 7.5 11.5 9V12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-inner">
+        <span class="footer-copy">John Wojciechowski · New York City</span>
+        <span class="footer-copy">jwojciechowski.com</span>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
